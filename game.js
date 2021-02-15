@@ -1,8 +1,4 @@
-//attack image show up only for 1 second and then hide
-
-
-//healing potion drop math.random
-
+//character images found at https://www.vhv.rs/
 //Objects for my characters
 var barbarian = {
     name: "Rampage",
@@ -53,16 +49,13 @@ var wizard = {
 }
 
 
-
-//choose your player
-
-//images found at https://www.vhv.rs/
 var char1;
 var char2 = ["barbarian", "fairy", "monk", "ogre", "witch", "wizard"];
 var store1 =""; 
 var store2 = "";
-var health = 5;
+var health = Math.floor(Math.random()*15)
 
+//change to fight area when character is selected and populate character images
 function divControl() {
     $(".characterSelect").addClass("d-none");
     $(".battle").removeClass("d-none");
@@ -72,27 +65,38 @@ function divControl() {
     
     $(".player1").append(`<img src='${char1.image}'></img>`);
     $(".player2").append(`<img src='${char2.image}'></img>`);
-    $(".stats1").append("Life remaining " + char1.health);
-    $(".stats2").append("Life remaining " + char2.health);
+    $(".stats1").text("Life remaining " + char1.health);
+    $(".stats2").text("Life remaining " + char2.health);
 }
 
+//assign characters
 $(".characterName").click(function () {
     localStorage.clear();
+
+    //get character choice & save
     char1 = this.id;
     localStorage.setItem("char1", char1)
-    let i = Math.floor(Math.random() * char2.length);
-    char2 = char2[i];
+    
+    //remove char1 from computer choice array
+    let compChoice = char2.filter(function(guy){
+        return guy !== char1
+    });
+    
+    //generate random computer choice opponent and save
+    let i = Math.floor(Math.random() * compChoice.length);
+    char2 = compChoice[i];
     localStorage.setItem("char2", char2)
     
+    //move to fight section
     divControl();
     
 })
 
+//change string of character name to variable
 function objAssign() {
     store1 =  localStorage.getItem("char1");
     store2 =  localStorage.getItem("char2");
-    console.log(store1)
-    console.log(store2)
+ 
     switch (store1) {
         case "barbarian":
             char1 = barbarian;
@@ -139,27 +143,54 @@ function objAssign() {
 
  
     
-$("#fight").click(function battle (){
-    var potion = Math.floor(Math.random()*2)
-   // $("#fight").addClass("d-none");
-    objAssign();
-    $(".attackImg").append("<img src='assets/attack.png'></img>")
-    if(potion === 0){
-        char2.health = char2.health -= char1.hitPoints
-        
-      $(".stats1").text("Life remaining " + char1.health);
-      $(".stats2").text("Life remaining " + char2.health);
-      
-    } else{
-        let newPoints = char2.health -= char1.hitPoints;
-        newPoints = newPoints += health;
-        char2.health = newPoints;
-      console.log(char2.hitPoints);
-      $(".attackImg").attr("src", "assets/potion.png");
-      $(".attack").text("Health Potion!!");
-      $(".stats2").text("Life remaining " + char2.health);
-      $(".stats1").text("Life remaining " + char1.health);
-    } 
+$("#fight").click(function (){
+    $(".attackImg").empty();
+    battle();
 })
-   
+
+function battle (){
+    var reflex = Math.floor(Math.random()*10)
+    objAssign();
+    $(".attackImg").empty();
+
+    if(char2.health <= 0) {
+        $(".attack").empty();
+        $(".attackImg").append("<img class='pow mb-6' src='assets/dead.png'></img>");
+        $(".stats2").text(char2.name + " is dead")
+        $(".attackImg").append(char1.name + " WINS!");
+    }
+    else if(char1.health <= 0){
+        
+        $(".attackImg").empty();
+        $(".attack").empty();
+        $(".stats1").text(char1.name + " is dead")
+        $(".attackImg").append(char2.name + " WINS!");
+    }
+    else {
+        //generate and use random health potion
+        var potion = Math.floor(Math.random()*2)
+
+        $(".attackImg").append("<img class='pow mb-6' src='assets/attack.png'></img>");
+        if(potion === 0){
+            char2.health = char2.health -= char1.hitPoints;
+            char1.health = char1.health -= reflex;
+            
+        $(".stats1").text("Life remaining " + char1.health);
+        $(".stats2").text("Life remaining " + char2.health);
+        
+        } else{
+            var newLife = char2.health -= char1.hitPoints;
+            newLife = newLife += health;
+            char2.health = newLife;
+            char1.health = char1.health -= reflex;
+            $(".attackImg").empty();
+        $(".attackImg").append("<img class='pow' src='assets/potion.png'></img>");
+        $(".attackImg").append("Health Potion!!");
+        $(".stats2").text("Life remaining " + char2.health);
+        $(".stats1").text("Life remaining " + char1.health);
+        } 
+       
+    }
+    
+} 
  
