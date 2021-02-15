@@ -59,33 +59,41 @@ var wizard = {
 //images found at https://www.vhv.rs/
 var char1;
 var char2 = ["barbarian", "fairy", "monk", "ogre", "witch", "wizard"];
-var store1;
-var store2;
+var store1 =""; 
+var store2 = "";
+var health = 5;
 
 function divControl() {
     $(".characterSelect").addClass("d-none");
     $(".battle").removeClass("d-none");
-    $("h1").text("Battle!!!")
+    $("h1").text("Battle!!!");
+   
+    objAssign();
+    
+    $(".player1").append(`<img src='${char1.image}'></img>`);
+    $(".player2").append(`<img src='${char2.image}'></img>`);
+    $(".stats1").append("Life remaining " + char1.health);
+    $(".stats2").append("Life remaining " + char2.health);
 }
 
 $(".characterName").click(function () {
+    localStorage.clear();
     char1 = this.id;
-    // console.log(char1);
+    localStorage.setItem("char1", char1)
     let i = Math.floor(Math.random() * char2.length);
     char2 = char2[i];
-    // console.log(char2);
-    //$(".characterSelect").addClass("is-hidden")
+    localStorage.setItem("char2", char2)
+    
     divControl();
-    objAssign();
-     
-
-    $(".player1").append(`<img src='${char1.image}'></img>`);
-    $(".player2").append(`<img src='${char2.image}'></img>`);
-    console.log(char1)
+    
 })
 
 function objAssign() {
-    switch (char1) {
+    store1 =  localStorage.getItem("char1");
+    store2 =  localStorage.getItem("char2");
+    console.log(store1)
+    console.log(store2)
+    switch (store1) {
         case "barbarian":
             char1 = barbarian;
             break;
@@ -105,7 +113,7 @@ function objAssign() {
             char1 = wizard;
             break;
     }
-    switch (char2) {
+    switch (store2) {
         case "barbarian":
             char2 = barbarian;
             break;
@@ -131,19 +139,27 @@ function objAssign() {
 
  
     
-$("#fight").click(function(char1, char2){
-    //    $("#fight").addClass("is-hidden");
- 
-    console.log("character 2 " + char2.hitPoints);
+$("#fight").click(function battle (){
     var potion = Math.floor(Math.random()*2)
+   // $("#fight").addClass("d-none");
+    objAssign();
+    $(".attackImg").append("<img src='assets/attack.png'></img>")
     if(potion === 0){
-      char2.health = char2.health - char1.hitPoints
+        char2.health = char2.health -= char1.hitPoints
+        
+      $(".stats1").text("Life remaining " + char1.health);
+      $(".stats2").text("Life remaining " + char2.health);
       
-
     } else{
-      char2.health = char2.health - char1.hitPoints + 5
+        let newPoints = char2.health -= char1.hitPoints;
+        newPoints = newPoints += health;
+        char2.health = newPoints;
       console.log(char2.hitPoints);
-      $(".outcome").text("Health Potion!!")
+      $(".attackImg").attr("src", "assets/potion.png");
+      $(".attack").text("Health Potion!!");
+      $(".stats2").text("Life remaining " + char2.health);
+      $(".stats1").text("Life remaining " + char1.health);
     } 
-    
-   })
+})
+   
+ 
