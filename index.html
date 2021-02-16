@@ -1,57 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Battle Bot</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css" class="style">
-     </head>
-      <body>
+
+<head>
+    <title>Battle Bot</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" class="style">
+</head>
+
 <body>
-    <header >
-        <h1 class="mb-6">Choose Your Character</h1>
-    </header>
+
+    <body>
+        <div class="jumbotron jumbotron-fluid bg-dark text-danger shadow-lg p-3 mb-5">
+            <div class="container">
+                <h1 class="display-4 text-center">Choose Your Character</h1>
+            </div>
+        </div>
+
+        <div class="container characterSelect">
+            <div class="row p-6">
+
+                <div class="col-md-4 text-center">
+                    <div class="card text-white bg-gradient-secondary mb-3" style="max-width: 18rem;">
+
+                        <div class="card-body">
+                            <img src="assets/barbarian.png" alt="barbarian">
+                            <p class="card-text mt-4 pt-3">
+                                <button id="barbarian"
+                                    class="button characterName btn-dark text-danger btn-block">Rampage -
+                                    Barbarian</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 text-center">
+                    <div class="card text-white bg-gradient-secondary mb-3" style="max-width: 18rem;">
+
+                        <div class="card-body">
+                            <img src="assets/Fairy.png" alt="fairy">
+                            <p class="card-text mt-4">
+                                <button id="fairy" class="button characterName btn-dark text-danger btn-block">Twix -
+                                    Fairy</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 text-center">
+                    <div class="card text-white bg-gradient-secondary mb-3" style="max-width: 18rem;">
+
+                        <div class="card-body mt-4">
+                            <img src="assets/monk.png" alt="monk">
+                            <p class="card-text mt-4 pt-6">
+                                <button id="monk" class="button characterName btn-dark text-danger btn-block">Shenzu -
+                                    Monk</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row p-6">
+
+                <div class="col-md-4 text-center">
+                    <div class="card text-white bg-gradient-secondary mb-3" style="max-width: 18rem;">
+
+                        <div class="card-body mt-4">
+                            <img src="assets/ogre.png" alt="Ogre">
+                            <p class="card-text mt-4 pt-6">
+                                <button id="ogre" class="button characterName btn-dark text-danger btn-block">Bloodmaw -
+                                    Ogre</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="card text-white bg-gradient-secondary mb-3" style="max-width: 18rem;">
+
+                        <div class="card-body mt-4">
+                            <img src="assets/witch.png" alt="witch">
+                            <p class="card-text mt-4 pt-6">
+                                <button id="witch" class="button characterName btn-dark text-danger btn-block">Sangoma -
+                                    Witch</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="card text-white bg-gradient-secondary mb-3" style="max-width: 18rem;">
+
+                        <div class="card-body mt-4">
+                            <img src="assets/wizard.png" alt="wizard">
+                            <p class="card-text mt-4 pt-6">
+                                <button id="wizard" class="button characterName btn-dark text-danger btn-block">Draven -
+                                    Wizard</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Battle Section  -->
+        <div class="container battle d-none">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <div class="card bg-gradient-secondary mb-3" style="max-width: 18rem;">
+                        <div class="card-body mt-4 player1"></div>
+                        <p class="h2 stats1"></p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+
+                    <div class="card bg-gradient-secondary mb-3" style="max-width: 18rem;">
+
+                        <div class="card-body mt-4 attackImg h3 text-danger"></div>
+
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="card bg-gradient-secondary mb-3" style="max-width: 18rem;">
+                        <div class="card-body mt-4 player2"></div>
+                        <p class="h2 stats2"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-center"></div>
+                <div class="col-md-4 text-center">
+                    <p class="attack">
+                        <button type="button" id="fight" class="btn btn-danger btn-block fight">FIGHT
     
-    <div class="container characterSelect">
-        <div class="row mb-6">
-            <div class = "col-md-4"><img src="assets/barbarian.png" alt = "barbarian"><button id = "barbarian" class="button characterName btn-info btn-block">Rampage - Barbarian</div> </button>
-            <div class = "col-md-4"><img src="assets/Fairy.png" alt = "fairy"> <button id = "fairy" class="button characterName btn-info btn-block">Twix - Fairy</button></div>
-            <div class = "col-md-4"><img src="assets/monk.png" alt = "monk"> <button id = "monk" class="button characterName btn-info btn-block">Shenzu - Monk</button></div>
-            
-        </div>
-        <div class="row">
-            <div class = "col-md-4"><img src="assets/ogre.png" alt = "Ogre"><button id = "ogre" class="button characterName btn-info btn-block">Bloodmaw - Ogre</button> </div>
-            <div class = "col-md-4"><img src="assets/witch.png" alt = "witch"> <button id = "witch" class="button characterName btn-info btn-block">Sangoma - Witch</button></div>
-            <div class = "col-md-4"><img src="assets/wizard.png" alt = "wizard"> <button id = "wizard" class="button characterName btn-info btn-block">Draven - Wizard</button></div>
-            
+                        </button>
+                    </p>
+                </div>
+                <div class="col-md-4 text-center"></div>
+            </div>
         </div>
         
-    </div>
-    <div class="container battle d-none">
-        <div class="row">
-            <div class = "col-md-4 player1"></div>
-            <div class = "col-md-4 attackImg"></div>
-            <div class = "col-md-4 player2"></div>
-            
-        </div>
-        <div class="row outcome">
-            <div class = "col-md-4 stats1"></div>
-            <div class = "col-md-4 attack"><button type="button" id="fight" class="btn btn-danger btn-block fight">FIGHT</button></div>
-            <div class = "col-md-4 stats2"></div>
-            
-        </div>
-        
-    </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="game.js"></script>
-</body>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+        <script src="game.js"></script>
+    </body>
+
 </html>
-
-
-   

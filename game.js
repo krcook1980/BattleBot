@@ -59,12 +59,13 @@ var health = Math.floor(Math.random()*15)
 function divControl() {
     $(".characterSelect").addClass("d-none");
     $(".battle").removeClass("d-none");
-    $("h1").text("Battle!!!");
+    $("h1").text("Battle Grounds");
    
     objAssign();
     
     $(".player1").append(`<img src='${char1.image}' alt='character one' class='mx-auto'></img>`);
     $(".player2").append(`<img src='${char2.image}' alt='character two' class='mx-auto'></img>`);
+    $(".attackImg").append(`${char1.name}\<br> will fight\<br>${char2.name}`)
     $(".stats1").text("Life remaining " + char1.health);
     $(".stats2").text("Life remaining " + char2.health);
 }
@@ -196,7 +197,7 @@ function battle (){
             char1.health = char1.health -= reflex;
             $(".attackImg").empty();
         $(".attackImg").append("ATTACKING!<img class='pow' src='assets/potion.png'></img>");
-        $(".attackImg").append("Health Potion!!");
+        $(".attackImg").append("<br>Health Potion!!");
         $(".stats2").text("Life remaining " + char2.health);
         $(".stats1").text("Life remaining " + char1.health);
         } 
@@ -233,7 +234,7 @@ function returnFire (){
             char2.health = char2.health -= reflex;
             $(".attackImg").empty();
         $(".attackImg").append("RETURN FIRE!<br><img class='pow' src='assets/potion.png'></img>");
-        $(".attackImg").append("Health Potion!!");
+        $(".attackImg").append("<br>Health Potion!!");
         $(".stats1").text("Life remaining " + char1.health);
         $(".stats2").text("Life remaining " + char2.health);
         
@@ -243,14 +244,14 @@ function returnFire (){
         $(".attackImg").empty();
         $(".attackImg").append("<img class='pow mb-6' src='assets/dead.png'></img>");
         $(".stats2").text(char2.name + " is dead")
-        $(".attackImg").append(char1.name + " WINS!");
+        $(".attackImg").append("<br>" + char1.name + " WINS!");
         playAgain()
     }
     else if(char1.health < 1){
         $(".attackImg").empty();
         $(".attackImg").append("<img class='pow mb-6' src='assets/dead.png'></img>");
         $(".stats1").text(char1.name + " is dead")
-        $(".attackImg").append(char2.name + " WINS!");
+        $(".attackImg").append("<br>" + char2.name + " WINS!");
         playAgain()
     }
 
