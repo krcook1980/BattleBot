@@ -60,6 +60,7 @@ function divControl() {
     $(".characterSelect").addClass("d-none");
     $(".battle").removeClass("d-none");
     $("h1").text("Battle Grounds");
+    $(".instructions").append(`Click fight! \<br> First you will attack and then receive return fire. \<br> Health potions will drop at random. Remaining life will be displayed. \<br> Last one standing wins!`)
    
     objAssign();
     
