@@ -178,6 +178,13 @@ function battle (){
         $(".stats1").text(char1.name + " is dead")
         $(".attackImg").append(char2.name + " WINS!");
     }
+    else if( char1.health < 1 && char2.health < 1){
+        $(".attackImg").empty();
+        $(".attack").empty();
+        $(".stats1").text(char1.name + " is dead")
+        $(".stats1").text(char2.name + " is dead")
+        $(".attackImg").append("IT'S A DRAW!");
+    }
     else {
         //generate and use random health potion
         var potion = Math.floor(Math.random()*2)
@@ -202,10 +209,10 @@ function battle (){
         $(".stats2").text("Life remaining " + char2.health);
         $(".stats1").text("Life remaining " + char1.health);
         } 
-       
+        setTimeout(returnFire, "1000");
     }
    
-    setTimeout(returnFire, "1000");
+    
 } 
 
 function returnFire (){
