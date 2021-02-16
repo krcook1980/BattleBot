@@ -5,7 +5,7 @@ var barbarian = {
     hitPoints: 20,
     health: 75,
     magic: 0,
-    image: "assets/barbarian.png"
+    image: "assets/Barbarian.png"
 }
 
 var fairy = {
@@ -21,7 +21,7 @@ var monk = {
     hitPoints: 15,
     health: 80,
     magic: 10,
-    image: "assets/monk.png"
+    image: "assets/Monk.png"
 }
 
 var ogre = {
@@ -45,7 +45,7 @@ var wizard = {
     hitPoints: 15,
     health: 80,
     magic: 15,
-    image: "assets/wizard.png"
+    image: "assets/Wizard.png"
 }
 
 
@@ -78,9 +78,11 @@ $(".characterName").click(function () {
     localStorage.setItem("char1", char1)
     
     //remove char1 from computer choice array
-    let compChoice = char2.filter(function(guy){
-        return guy !== char1
-    });
+    // let compChoice = char2.filter(function(guy){
+    //     return guy !== char1
+    // });
+
+    let compChoice = filter(char2, (guy) => {return guy !== char1 });
     
     //generate random computer choice opponent and save
     let i = Math.floor(Math.random() * compChoice.length);
@@ -150,16 +152,18 @@ $("#fight").click(function (){
 
 function battle (){
     var reflex = Math.floor(Math.random()*10)
+
+    
     objAssign();
     $(".attackImg").empty();
 
-    if(char2.health <= 0) {
+    if(char2.health < 1) {
         $(".attack").empty();
         $(".attackImg").append("<img class='pow mb-6' src='assets/dead.png'></img>");
         $(".stats2").text(char2.name + " is dead")
         $(".attackImg").append(char1.name + " WINS!");
     }
-    else if(char1.health <= 0){
+    else if(char1.health < 1){
         
         $(".attackImg").empty();
         $(".attack").empty();
